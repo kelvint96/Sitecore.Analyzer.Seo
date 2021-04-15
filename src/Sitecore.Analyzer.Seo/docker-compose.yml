@@ -1,6 +1,9 @@
 version: '3.4'
 
 services:
+  analyticsdb:
+    image: mongo
+
   analytics.api:
     image: ${DOCKER_REGISTRY-}analyticsapi
     build:
@@ -20,3 +23,5 @@ services:
       context: .
       dockerfile: WebMVC/Dockerfile
 
+volumes:
+  mongo_data: 
