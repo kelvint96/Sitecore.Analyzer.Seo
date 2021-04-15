@@ -1,0 +1,22 @@
+version: '3.4'
+
+services:
+  analytics.api:
+    image: ${DOCKER_REGISTRY-}analyticsapi
+    build:
+      context: .
+      dockerfile: Analytics.API/Dockerfile
+
+  webscraper.api:
+    image: ${DOCKER_REGISTRY-}webscraperapi
+    build:
+      context: .
+      dockerfile: WebScraper.API/Dockerfile
+
+
+  webmvc:
+    image: ${DOCKER_REGISTRY-}webmvc
+    build:
+      context: .
+      dockerfile: WebMVC/Dockerfile
+
