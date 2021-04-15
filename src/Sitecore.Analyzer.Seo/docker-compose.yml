@@ -3,18 +3,25 @@ version: '3.4'
 services:
   analyticsdb:
     image: mongo
+  
+  redisdb:
+    image: redis:alpine
 
   analytics.api:
     image: ${DOCKER_REGISTRY-}analyticsapi
     build:
       context: .
       dockerfile: Analytics.API/Dockerfile
+    depends_on:
+      - analyticsdb
 
   webscraper.api:
     image: ${DOCKER_REGISTRY-}webscraperapi
     build:
       context: .
       dockerfile: WebScraper.API/Dockerfile
+    depends_on: 
+      - redisdb
 
 
   webmvc:

@@ -10,6 +10,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebScraper.API.Common.Options;
+using WebScraper.API.Interfaces.Scraper;
+using WebScraper.API.Services.Scraper;
 
 namespace WebScraper.API
 {
@@ -31,6 +34,21 @@ namespace WebScraper.API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebScraper.API", Version = "v1" });
             });
+
+            //configure redis cache
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = Configuration["CacheSettings:ConnectionString"];
+                options.InstanceName = "WebScraper.API.";
+            });
+
+            //configure options pattern
+            services.Configure<DatabaseSettingOptions>(Configuration.GetSection(DatabaseSettingOptions.DatabaseSettings));
+            services.Configure<CacheSettingOptions>(Configuration.GetSection(CacheSettingOptions.CacheSettings));
+
+            //dependency injection of services
+            services.AddScoped<ITextScraperService, TextScraperService>();
+            services.AddHttpClient<ILinkScraperService, LinkScraperService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
