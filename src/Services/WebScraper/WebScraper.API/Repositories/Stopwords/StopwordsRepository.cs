@@ -2,35 +2,64 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebScraper.API.Data;
+using MongoDB.Driver;
 using WebScraper.API.Interfaces.Stopwords;
 
 namespace WebScraper.API.Repositories.Stopwords
 {
     public class StopwordsRepository : IStopwordsRepository
     {
-        public Task<Entities.Stopwords> CreateStopword(Entities.Stopwords stopword)
+        private readonly IStopwordContext _context;
+
+        public StopwordsRepository(IStopwordContext context)
         {
-            throw new NotImplementedException();
+            _context = context ?? throw new ArgumentNullException(nameof(context));
         }
 
-        public Task<bool> DeleteStopwords()
+        public async Task CreateStopword(Entities.Stopwords stopword)
         {
-            throw new NotImplementedException();
+            await _context.StopwordsCollection.InsertOneAsync(stopword);
         }
 
-        public Task<List<Entities.Stopwords>> GetStopwordByName(string name)
+        public async Task<bool> DeleteStopwords(string id)
         {
-            throw new NotImplementedException();
+            FilterDefinition<Entities.Stopwords> filter = Builders<Entities.Stopwords>.Filter.Eq(p => p.Id, id);
+
+            DeleteResult deleteResult = await _context
+                                                .StopwordsCollection
+                                                .DeleteOneAsync(filter);
+
+            return deleteResult.IsAcknowledged
+                && deleteResult.DeletedCount > 0;
         }
 
-        public Task<List<Entities.Stopwords>> GetStopwords()
+        public async Task<List<Entities.Stopwords>> GetStopwordByName(string name)
         {
-            throw new NotImplementedException();
+            FilterDefinition<Entities.Stopwords> filter = Builders<Entities.Stopwords>.Filter.Eq(p => p.Stopword, name);
+
+            return await _context
+                            .StopwordsCollection
+                            .Find(filter)
+                            .ToListAsync();
         }
 
-        public Task<bool> UpdateStopwords(Entities.Stopwords stopword)
+        public async Task<List<Entities.Stopwords>> GetStopwords()
         {
-            throw new NotImplementedException();
+            return await _context
+                .StopwordsCollection
+                .Find(x => true)
+                .ToListAsync();
+        }
+
+        public async Task<bool> UpdateStopwords(Entities.Stopwords stopword)
+        {
+            var updateResult = await _context
+                .StopwordsCollection
+                .ReplaceOneAsync(filter: g => g.Id == stopword.Id, replacement: stopword);
+
+            return updateResult.IsAcknowledged
+                    && updateResult.ModifiedCount > 0;
         }
     }
 }

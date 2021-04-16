@@ -24,6 +24,16 @@ namespace WebScraper.API.Services.Scraper
             throw new NotImplementedException();
         }
 
+        public Dictionary<string, int> GetWordOccurences(List<string> textList, List<Stopwords> stopwords)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Dictionary<string, int> GetWordOccurences(string text, List<Stopwords> stopwords)
+        {
+            throw new NotImplementedException();
+        }
+
         public Task<ScrapedData> ScrapeData(string text)
         {
             throw new NotImplementedException();

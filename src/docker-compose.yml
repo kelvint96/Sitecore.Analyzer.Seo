@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  analyticsdb:
+  mongodb:
     image: mongo
   
   redisdb:
@@ -11,24 +11,18 @@ services:
     image: ${DOCKER_REGISTRY-}analyticsapi
     build:
       context: .
-      dockerfile: Analytics.API/Dockerfile
+      dockerfile: Services/Analytics/Analytics.API/Dockerfile
     depends_on:
-      - analyticsdb
+      - mongodb
 
   webscraper.api:
     image: ${DOCKER_REGISTRY-}webscraperapi
     build:
       context: .
-      dockerfile: WebScraper.API/Dockerfile
+      dockerfile: Services/WebScraper/WebScraper.API/Dockerfile
     depends_on: 
       - redisdb
 
-
-  webmvc:
-    image: ${DOCKER_REGISTRY-}webmvc
-    build:
-      context: .
-      dockerfile: WebMVC/Dockerfile
 
 volumes:
   mongo_data: 

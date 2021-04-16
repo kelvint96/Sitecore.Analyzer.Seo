@@ -11,7 +11,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebScraper.API.Common.Options;
+using WebScraper.API.Data;
 using WebScraper.API.Interfaces.Scraper;
+using WebScraper.API.Interfaces.Stopwords;
+using WebScraper.API.Repositories.Stopwords;
 using WebScraper.API.Services.Scraper;
 
 namespace WebScraper.API
@@ -47,7 +50,11 @@ namespace WebScraper.API
             services.Configure<CacheSettingOptions>(Configuration.GetSection(CacheSettingOptions.CacheSettings));
 
             //dependency injection of services
+            services.AddSingleton<IStopwordContext, StopwordContext>();
             services.AddScoped<ITextScraperService, TextScraperService>();
+            services.AddScoped<IStopwordsRepository, StopwordsRepository>();
+
+            //HttpClients
             services.AddHttpClient<ILinkScraperService, LinkScraperService>();
         }
 

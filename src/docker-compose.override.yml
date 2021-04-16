@@ -1,8 +1,8 @@
 version: '3.4'
 
 services:
-  analyticsdb:
-    container_name: analyticsdb
+  mongodb:
+    container_name: mongodb
     restart: always
     ports:
       - "27017:27017"
@@ -26,12 +26,10 @@ services:
     container_name: webscraper.api
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - "DatabaseSettings__ConnectionString=mongodb://mongodb:27017"
+      - "DatabaseSettings__DatabaseName=StopwordDb"
+      - "DatabaseSettings__CollectionName=Stopwords"
+      - "CacheSettings__ConnectionString=redisdb:6379"
     ports:
       - "9001:80"
-
-  webmvc:
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-    ports:
-      - "8000:80"
 

@@ -11,7 +11,7 @@ namespace WebScraper.API.Interfaces.Stopwords
         Task<List<StopwordsEntity>> GetStopwords();
         Task<List<StopwordsEntity>> GetStopwordByName(string name);
         Task<bool> UpdateStopwords(StopwordsEntity stopword);
-        Task<bool> DeleteStopwords();
-        Task<StopwordsEntity> CreateStopword(StopwordsEntity stopword);
+        Task<bool> DeleteStopwords(string id);
+        Task CreateStopword(StopwordsEntity stopword);
     }
 }

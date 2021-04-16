@@ -12,11 +12,11 @@ namespace WebScraper.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ScraperController : ControllerBase
+    public class SiteController : ControllerBase
     {
         private readonly ILinkScraperService _linkScraperService;
 
-        public ScraperController(ILinkScraperService linkScraperService)
+        public SiteController(ILinkScraperService linkScraperService)
         {
             _linkScraperService = linkScraperService ?? throw new ArgumentNullException(nameof(linkScraperService));
         }
@@ -31,6 +31,16 @@ namespace WebScraper.API.Controllers
             }
 
             return BadRequest();
+        }
+
+        [HttpPost("Occurence")]
+        [ProducesResponseType(typeof(Dictionary<string, int>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<Dictionary<string, int>>> GetOccurence([FromBody] string text)
+        {
+            var occurences = _linkScraperService.GetWordOccurences(text, new List<Stopwords>() { new Stopwords { Stopword = "aims" } });
+
+            return Ok(occurences);
+
         }
     }
 }

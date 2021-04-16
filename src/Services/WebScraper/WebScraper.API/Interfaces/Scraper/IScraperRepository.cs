@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace WebScraper.API.Repository
+namespace WebScraper.API.Interfaces.Scraper
 {
-    public class ScraperRepository
+    public class IScraperRepository
     {
     }
 }
