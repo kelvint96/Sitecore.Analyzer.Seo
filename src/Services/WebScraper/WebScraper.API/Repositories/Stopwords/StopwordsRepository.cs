@@ -34,14 +34,14 @@ namespace WebScraper.API.Repositories.Stopwords
                 && deleteResult.DeletedCount > 0;
         }
 
-        public async Task<List<Entities.Stopwords>> GetStopwordByName(string name)
+        public async Task<Entities.Stopwords> GetStopwordById(string id)
         {
-            FilterDefinition<Entities.Stopwords> filter = Builders<Entities.Stopwords>.Filter.Eq(p => p.Stopword, name);
+            FilterDefinition<Entities.Stopwords> filter = Builders<Entities.Stopwords>.Filter.Eq(p => p.Id, id);
 
             return await _context
                             .StopwordsCollection
                             .Find(filter)
-                            .ToListAsync();
+                            .FirstOrDefaultAsync();
         }
 
         public async Task<List<Entities.Stopwords>> GetStopwords()

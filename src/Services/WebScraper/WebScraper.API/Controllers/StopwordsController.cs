@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDB.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,12 +30,12 @@ namespace WebScraper.API.Controllers
             return stopwords;
         }
 
-        [HttpGet("{id:length(24)}")]
+        [HttpGet("{id:length(24)}", Name = "GetStopwordById")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(Stopwords), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Stopwords>> GetStopwordByName(string name)
+        public async Task<ActionResult<Stopwords>> GetStopwordById(string id)
         {
-            var stopword = await _stopwordsRepository.GetStopwordByName(name);
+            var stopword = await _stopwordsRepository.GetStopwordById(id);
             if (stopword == null)
             {
                 return NotFound();
@@ -46,9 +47,11 @@ namespace WebScraper.API.Controllers
         [ProducesResponseType(typeof(Stopwords), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<Stopwords>> CreateStopword([FromBody] Stopwords stopword)
         {
+            if (string.IsNullOrEmpty(stopword.Id)) stopword.Id = ObjectId.GenerateNewId().ToString();
+
             await _stopwordsRepository.CreateStopword(stopword);
 
-            return CreatedAtRoute("GetProduct", new { id = stopword.Id }, stopword);
+            return CreatedAtRoute("GetStopwordById", new { id = stopword.Id }, stopword);
         }
 
         [HttpPut]

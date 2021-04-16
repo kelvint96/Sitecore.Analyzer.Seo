@@ -7,6 +7,7 @@ using System.Net;
 using System.Threading.Tasks;
 using WebScraper.API.Entities;
 using WebScraper.API.Interfaces.Scraper;
+using WebScraper.API.Model;
 
 namespace WebScraper.API.Controllers
 {
@@ -30,17 +31,27 @@ namespace WebScraper.API.Controllers
                 return Ok(await _linkScraperService.ScrapeData(text));
             }
 
-            return BadRequest();
+            return BadRequest("Unsupported 'scrapeType'.");
         }
 
         [HttpPost("Occurence")]
         [ProducesResponseType(typeof(Dictionary<string, int>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<Dictionary<string, int>>> GetOccurence([FromBody] string text)
+        public async Task<ActionResult<Dictionary<string, int>>> GetOccurence(OccurenceRequest request)
         {
-            var occurences = _linkScraperService.GetWordOccurences(text, new List<Stopwords>() { new Stopwords { Stopword = "aims" } });
 
-            return Ok(occurences);
+            var result = _linkScraperService.GetWordOccurences(request.Text, request.Stopwords);
 
+            return Ok(result);
+        }
+
+        [HttpPost("MultiOccurence")]
+        [ProducesResponseType(typeof(Dictionary<string, int>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<Dictionary<string, int>>> GetMultiOccurence(MultiOccurenceRequest request)
+        {
+
+            var result = _linkScraperService.GetWordOccurences(request.Text, request.Stopwords);
+
+            return Ok(result);
         }
     }
 }

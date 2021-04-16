@@ -9,7 +9,7 @@ namespace WebScraper.API.Interfaces.Stopwords
     public interface IStopwordsRepository
     {
         Task<List<StopwordsEntity>> GetStopwords();
-        Task<List<StopwordsEntity>> GetStopwordByName(string name);
+        Task<StopwordsEntity> GetStopwordById(string id);
         Task<bool> UpdateStopwords(StopwordsEntity stopword);
         Task<bool> DeleteStopwords(string id);
         Task CreateStopword(StopwordsEntity stopword);

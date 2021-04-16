@@ -54,7 +54,17 @@ namespace WebScraper.API.Services.Scraper
 
         public Dictionary<string, int> GetWordOccurences(List<string> textList, List<Stopwords> stopwords)
         {
-            throw new NotImplementedException();
+            Dictionary<string, int> occurenceDictionary = new Dictionary<string, int>();
+            foreach (var text in textList)
+            {
+                var occurence = GetWordOccurences(text, stopwords);
+                occurenceDictionary = (from e in occurenceDictionary.Concat(occurence)
+                                       group e by e.Key into g
+                                       select new { Name = g.Key, Count = g.Sum(kvp => kvp.Value) })
+              .ToDictionary(item => item.Name, item => item.Count);
+            }
+
+            return occurenceDictionary;
         }
 
         public Dictionary<string, int> GetWordOccurences(string text, List<Stopwords> stopwords)
