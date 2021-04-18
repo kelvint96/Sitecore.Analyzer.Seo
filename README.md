@@ -29,12 +29,15 @@ Make sure all the prerequisites are installed before proceeding.
 **Important: Make sure that Docker Desktop is running before proceeding.**
 
 1. Firstly, create an empty folder and clone the repository into the folder.
+
 ` git clone https://github.com/kelvint96/Sitecore.Analyzer.Seo`
 
 2. This may take a minute or two. After cloning the repository into the folder, run a cd command to change directory to the source folder that was created.
+
 ` cd Sitecore.Analyzer.Seo/src `
 
 3. You may now run the following docker commands to install the images and host the solutions in docker. This might take a minute or two, while docker is pulling the images.
+
 `docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d`
 
 4. After running the above commands, you should be able to see the solution being run on docker desktop.
