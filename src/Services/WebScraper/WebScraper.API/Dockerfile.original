@@ -6,10 +6,10 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["Services/WebScraper/WebScraper.API/WebScraper.API.csproj", "Services/WebScraper/WebScraper.API/"]
-RUN dotnet restore "Services/WebScraper/WebScraper.API/WebScraper.API.csproj"
+COPY ["WebScraper.API/WebScraper.API.csproj", "WebScraper.API/"]
+RUN dotnet restore "WebScraper.API/WebScraper.API.csproj"
 COPY . .
-WORKDIR "/src/Services/WebScraper/WebScraper.API"
+WORKDIR "/src/WebScraper.API"
 RUN dotnet build "WebScraper.API.csproj" -c Release -o /app/build
 
 FROM build AS publish

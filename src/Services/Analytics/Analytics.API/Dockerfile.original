@@ -6,10 +6,10 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["Services/Analytics/Analytics.API/Analytics.API.csproj", "Services/Analytics/Analytics.API/"]
-RUN dotnet restore "Services/Analytics/Analytics.API/Analytics.API.csproj"
+COPY ["Analytics.API/Analytics.API.csproj", "Analytics.API/"]
+RUN dotnet restore "Analytics.API/Analytics.API.csproj"
 COPY . .
-WORKDIR "/src/Services/Analytics/Analytics.API"
+WORKDIR "/src/Analytics.API"
 RUN dotnet build "Analytics.API.csproj" -c Release -o /app/build
 
 FROM build AS publish

@@ -5,6 +5,7 @@
 		<DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
 		<DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<DockerfileContext>..\..\..</DockerfileContext>
 
 	</PropertyGroup>
 
