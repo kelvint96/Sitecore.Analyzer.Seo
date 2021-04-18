@@ -1,0 +1,85 @@
+﻿@{
+    ViewData["Title"] = "Stopword Management";
+}
+ 
+<partial name="_StopwordAdd" />
+
+<table id="table"
+       data-search="true"
+       data-pagination="true"
+       data-response-handler="responseHandler">
+</table>
+
+@section Scripts{
+    <script>
+        var tableData = [];
+
+        function initTable() {
+
+            $("#table").bootstrapTable('destroy').bootstrapTable({
+                data: tableData,
+                height: 550,
+                columns:
+                    [{
+                        title: 'Id',
+                        field: 'id',
+                        align: 'center',
+                        valign: 'middle'
+                    }, {
+                        title: 'Stopword',
+                        field: 'stopword',
+                        align: 'center',
+                        valign: 'middle',
+                        sortable: true,
+                    }, {
+                        title: 'Active',
+                        field: 'active',
+                        align: 'center',
+                        valign: 'middle',
+                        sortable: true
+                    }, {
+                        field: 'operate',
+                        title: 'Item Operate',
+                        align: 'center',
+                        clickToSelect: false,
+                        events: window.operateEvents,
+                        formatter: operateFormatter
+                    }
+                    ]
+            })
+        }
+
+        function operateFormatter(value, row, index) {
+            return [
+                '<a class="remove" href="javascript:void(0)" title="Remove">',
+                '<i class="fa fa-trash"></i>',
+                '</a>'
+            ].join('')
+        }
+
+        window.operateEvents = {
+            'click .remove': function (e, value, row, index) {
+                $.ajax({
+                    url: "Stopword/Delete",
+                    data: { id: row.id },
+                    success: function (data) {
+                        getStopwordData()
+                    }
+                });
+            }
+        }
+
+        function getStopwordData() {
+            $.ajax({
+                url: "Stopword/Get",
+                data: {},
+                success: function (data) {
+                    tableData = data;
+                    initTable();
+                }
+            });
+        }
+
+        getStopwordData();
+    </script>
+}

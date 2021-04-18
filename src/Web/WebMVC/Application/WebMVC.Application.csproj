@@ -21,9 +21,4 @@
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Services\Stopword\Commands\" />
-	  <Folder Include="Services\Stopword\Queries\" />
-	</ItemGroup>
-
 </Project>

@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] - SEO Analyzer</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="~/lib/bootstrap-table/bootstrap-table.min.css" rel="stylesheet" />
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/css/spinner.css" />
 </head>
@@ -24,7 +25,7 @@
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Stopwords">Stopwords</a>
+                            <a class="nav-link text-white" asp-area="" asp-controller="Stopword" asp-action="Index">Stopwords</a>
                         </li>
                     </ul>
                 </div>
@@ -47,8 +48,10 @@
     <script src="~/lib/jquery-ajax-unobtrusive/jquery.unobtrusive-ajax.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/bootstrap-table/bootstrap-table.min.js"></script>
+    <script src="~/lib/font-awesome/js/all.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <partial name="_ValidationScriptsPartial">
+        @await RenderSectionAsync("Scripts", required: false)
 </body>
 
 

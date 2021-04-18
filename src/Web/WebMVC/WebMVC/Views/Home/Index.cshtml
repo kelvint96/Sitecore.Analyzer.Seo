@@ -18,6 +18,7 @@
         <div class="row">
             <p>Insert Text or URL here:</p>
             <textarea id="mainInput" rows="5" class="form-control" asp-for="Text"></textarea>
+            <span asp-validation-for="Text" class="text-danger"></span>
         </div>
 
         <br />
@@ -32,16 +33,16 @@
             </div>
             <div class="col">
                 <p>Filters: </p>
-                <div class="form-check form-check-inline">
+                <div id="chkGrpBody" class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="chkBody" asp-for="isBodySelected">
                     <label class="form-check-label" for="chkBody">Body</label>
                 </div>
-                <div class="form-check form-check-inline">
+                <div id="chkGrpMeta" class="form-check form-check-inline">
                     <input class="form-check-input" type="checkbox" id="chkMeta" asp-for="isMetaSelected">
                     <label class="form-check-label" for="chkMeta">Meta</label>
                 </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="chkLink" asp-for="isLinkSelected" >
+                <div id="chkGrpLink" class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="chkLink" asp-for="isLinkSelected">
                     <label class="form-check-label" for="chkLink">Link</label>
                 </div>
             </div>
@@ -63,6 +64,19 @@
 
 @section Scripts{
     <script>
+        var checkScrapeType = () => {
+            if ($("#ScrapeType").val() === '@ScrapeTypes.Text.Name') {
+                $("#chkGrpMeta").hide()
+            } else {
+                $("#chkGrpMeta").show()
+            }
+        }
+
+        $("#ScrapeType").change(() => {
+            checkScrapeType()
+        });
+
+        checkScrapeType()
     </script>
 
 }

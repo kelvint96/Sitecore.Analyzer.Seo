@@ -27,7 +27,7 @@
     <div class="tab-content" id="nav-tabContent">
         @if (Model.isBodySelected)
         {
-            <div class="tab-pane fade" id="nav-body" role="tabpanel" aria-labelledby="nav-home-tab"></div>
+            <div class="tab-pane fade" id="nav-body" role="tabpanel" aria-labelledby="nav-home-tab">...</div>
         }
         @if (Model.isMetaSelected)
         {
@@ -35,7 +35,7 @@
         }
         @if (Model.isLinkSelected)
         {
-            <div class="tab-pane fade" id="nav-link" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+    <div class="tab-pane fade" id="nav-link" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
         }
     </div>
 </div>
@@ -50,32 +50,38 @@
     }
 
     if (@Json.Serialize(Model.isBodySelected)) {
+        $('#overlay').show()
         $.ajax({
             url: "Home/BodyData/",
-            data: {text: '@Model.Text', scrapeType: '@Model.ScrapeType' },
+            data: { text: '@Model.Text', scrapeType: '@Model.ScrapeType' },
             success: function (data) {
                 $('#nav-body').html(data);
-            },
+                $('#overlay').hide()
+            }
         });
     }
 
     if (@Json.Serialize(Model.isMetaSelected)) {
+        $('#overlay').show()
         $.ajax({
             url: "Home/MetaData/",
-            data: {text: '@Model.Text', scrapeType: '@Model.ScrapeType' },
+            data: { text: '@Model.Text', scrapeType: '@Model.ScrapeType' },
             success: function (data) {
                 $('#nav-meta').html(data);
-            },
+                $('#overlay').hide()
+            }
         });
     }
 
     if (@Json.Serialize(Model.isLinkSelected)) {
+        $('#overlay').show()
         $.ajax({
             url: "Home/LinkData/",
             data: {text: '@Model.Text', scrapeType: '@Model.ScrapeType' },
             success: function (data) {
                 $('#nav-link').html(data);
-            },
+                $('#overlay').hide()
+            }
         });
     }
 </script>

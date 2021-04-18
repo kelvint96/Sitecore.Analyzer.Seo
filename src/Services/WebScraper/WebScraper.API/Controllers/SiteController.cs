@@ -43,8 +43,8 @@ namespace WebScraper.API.Controllers
             var stopwords = await _stopwordsRepository.GetStopwords();
             var bodyData = new BodyData
             {
-                Body = scrapedData.BodyContent,
-                BodyOccurence = _linkScraperService.GetWordOccurences(scrapedData.BodyContent, stopwords)
+                Body = scrapedData.BodyContent ?? string.Empty,
+                BodyOccurence = _linkScraperService.GetWordOccurences(scrapedData.BodyContent ?? string.Empty, stopwords)
             };
 
             return Ok(bodyData);
@@ -136,6 +136,8 @@ namespace WebScraper.API.Controllers
 
         private async Task<ScrapedData> CheckForScrapedDataExistsInCacheAsync(string text)
         {
+            if (string.IsNullOrEmpty(text)) return new ScrapedData();
+
             ScrapedData scrapedData = await _cache.GetSiteDataFromCache(text);
             if (scrapedData is null)
             {

@@ -3,3 +3,31 @@
 *@
 @{
 }
+
+@model WebMVC.Application.Services.Scraper.Models.Dto.MetaDto
+
+<div class="container">
+    <h6>
+        Raw Data:
+    </h6>
+    <textarea readonly class="form-control">@Json.Serialize(Model.Metas)</textarea>
+
+
+    <br />
+    <h6>Occurences</h6>
+    <table id="metaTable"
+           data-pagination="true"
+           data-search="true">
+        <thead>
+            <tr>
+                <th data-field="no" data-sortable="true">#</th>
+                <th data-field="word" data-sortable="true">Word</th>
+                <th data-field="occurence" data-sortable="true">Occurences</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+<script>
+    $('#bodyTable').bootstrapTable({data: @Json.Serialize(Model.OccurenceList)})
+</script>

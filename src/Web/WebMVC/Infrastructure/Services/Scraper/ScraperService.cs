@@ -22,7 +22,7 @@ namespace WebMVC.Infrastructure.Services.Scraper
 
         public async Task<BodyData> GetBodyData(string text, string scrapeType)
         {
-            var json = new StringContent(JsonSerializer.Serialize(new { text = text }), Encoding.UTF8, "application/json");
+            var json = new StringContent(JsonSerializer.Serialize(new { text = text ?? string.Empty }), Encoding.UTF8, "application/json");
             using var httpResponse = await _httpClient.PostAsync($"/api/Scrape/{scrapeType.First().ToString().ToUpper() + scrapeType.Substring(1)}/Body", json);
 
             httpResponse.EnsureSuccessStatusCode();
@@ -34,8 +34,8 @@ namespace WebMVC.Infrastructure.Services.Scraper
 
         public async Task<LinkData> GetLinkData(string text, string scrapeType)
         {
-            var json = new StringContent(JsonSerializer.Serialize(new { text = text }), Encoding.UTF8, "application/json");
-            using var httpResponse = await _httpClient.PostAsync($"/api/{scrapeType.First().ToString().ToUpper() + scrapeType.Substring(1)}/Link", json);
+            var json = new StringContent(JsonSerializer.Serialize(new { text = text ?? string.Empty }), Encoding.UTF8, "application/json");
+            using var httpResponse = await _httpClient.PostAsync($"/api/Scrape/{scrapeType.First().ToString().ToUpper() + scrapeType.Substring(1)}/Link", json);
 
             httpResponse.EnsureSuccessStatusCode();
 
@@ -46,8 +46,8 @@ namespace WebMVC.Infrastructure.Services.Scraper
 
         public async Task<MetaData> GetMetaData(string text, string scrapeType)
         {
-            var json = new StringContent(JsonSerializer.Serialize(new { text = text }), Encoding.UTF8, "application/json");
-            using var httpResponse = await _httpClient.PostAsync($"/api/{scrapeType.First().ToString().ToUpper() + scrapeType.Substring(1)}/Meta", json);
+            var json = new StringContent(JsonSerializer.Serialize(new { text = text ?? string.Empty }), Encoding.UTF8, "application/json");
+            using var httpResponse = await _httpClient.PostAsync($"/api/Scrape/{scrapeType.First().ToString().ToUpper() + scrapeType.Substring(1)}/Meta", json);
 
             httpResponse.EnsureSuccessStatusCode();
 

@@ -14,7 +14,7 @@ namespace WebScraper.API.Services.Scraper
         public async Task<ScrapedData> ScrapeData(string text)
         {
             var scrapedData = new ScrapedData();
-            if (string.IsNullOrEmpty(text))
+            if (!string.IsNullOrEmpty(text))
             {
                 scrapedData.BodyContent = text;
 

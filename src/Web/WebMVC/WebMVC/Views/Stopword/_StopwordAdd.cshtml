@@ -1,0 +1,34 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+<div class="container">
+    <form method="post"
+          data-ajax="true"
+          data- data-ajax-method="post"
+          data-ajax-url="Stopword/Add"
+          data-ajax-loading="#overlay"
+          data-ajax-success="getStopwordData">
+
+        <div class="row">
+            <div class="col-2"><p>Stopword:</p></div>
+            <div class="col-2">
+                <input name="stopword" type="text" class="form-control" data-val="true"
+                       data-val-required="Stopword is required." 
+                       data-val-maxlength="Maximum number of characters that can be entered is 20!" 
+                       data-val-maxlength-max="20" 
+                       maxlength="20" />
+                <span class="text-danger field-validation-valid"
+                      data-valmsg-for="stopword" data-valmsg-replace="true"></span>
+            </div>
+            <div class="col-2">
+                <button class="btn btn-primary">Add Stopword</button>
+            </div>
+
+        </div>
+    </form>
+
+</div>

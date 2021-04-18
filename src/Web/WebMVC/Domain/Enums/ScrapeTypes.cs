@@ -8,8 +8,8 @@ namespace WebMVC.Domain.Enums
 {
     public class ScrapeTypes : Enumeration
     {
-        public static ScrapeTypes Text = new ScrapeTypes(1, "text");
-        public static ScrapeTypes Link = new ScrapeTypes(1, "link");
+        public static ScrapeTypes Text = new ScrapeTypes(1, "Text");
+        public static ScrapeTypes Link = new ScrapeTypes(1, "Url");
         public ScrapeTypes(short id, string name) : base(id, name)
         {
         }

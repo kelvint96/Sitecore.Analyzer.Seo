@@ -20,33 +20,39 @@ namespace WebScraper.API.Services.Scraper
         }
         public async Task<ScrapedData> ScrapeData(string link)
         {
-            _httpClient.BaseAddress = new Uri(link);
-            var response = await _httpClient.GetAsync(link);
-            var rawHtmlData = await response.Content.ReadAsStringAsync();
-            HtmlDocument pageDocument = new HtmlDocument();
-            pageDocument.LoadHtml(rawHtmlData);
-
             var scrapedData = new ScrapedData();
 
-            scrapedData.BodyContent = pageDocument.DocumentNode.SelectSingleNode("//body").InnerText;
+            if (!string.IsNullOrEmpty(link))
+            {
+                _httpClient.BaseAddress = new Uri(link);
+                var response = await _httpClient.GetAsync(link);
+                var rawHtmlData = await response.Content.ReadAsStringAsync();
+                HtmlDocument pageDocument = new HtmlDocument();
+                pageDocument.LoadHtml(rawHtmlData);
 
-            pageDocument.DocumentNode.SelectNodes("//meta").ToList()
-                .ForEach(x =>
-                {
-                    var metaContent = x.GetAttributeValue("content", string.Empty);
 
-                    if (!string.IsNullOrWhiteSpace(metaContent)) scrapedData.MetaTags.Add(metaContent);
-                });
 
-            pageDocument.DocumentNode.SelectNodes("//a[@href]").ToList()
-                .ForEach(x =>
-                {
-                    var href = x.GetAttributeValue("href", string.Empty);
-                    Uri Uri;
-                    var isExternalLink = Uri.TryCreate(href, UriKind.Absolute, out Uri) && (Uri.Scheme == Uri.UriSchemeHttp || Uri.Scheme == Uri.UriSchemeHttps);
+                scrapedData.BodyContent = pageDocument.DocumentNode.SelectSingleNode("//body").InnerText;
 
-                    if (isExternalLink) scrapedData.Links.Add(href);
-                });
+                pageDocument.DocumentNode.SelectNodes("//meta").ToList()
+                    .ForEach(x =>
+                    {
+                        var metaContent = x.GetAttributeValue("content", string.Empty);
+
+                        if (!string.IsNullOrWhiteSpace(metaContent)) scrapedData.MetaTags.Add(metaContent);
+                    });
+
+                pageDocument.DocumentNode.SelectNodes("//a[@href]").ToList()
+                    .ForEach(x =>
+                    {
+                        var href = x.GetAttributeValue("href", string.Empty);
+                        Uri Uri;
+                        var isExternalLink = Uri.TryCreate(href, UriKind.Absolute, out Uri) && (Uri.Scheme == Uri.UriSchemeHttp || Uri.Scheme == Uri.UriSchemeHttps);
+
+                        if (isExternalLink) scrapedData.Links.Add(href);
+                    });
+            }
+
 
             return scrapedData;
         }
