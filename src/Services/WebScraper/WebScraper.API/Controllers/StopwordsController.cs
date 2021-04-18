@@ -22,6 +22,10 @@ namespace WebScraper.API.Controllers
             _stopwordsRepository = stopwordsRepository ?? throw new ArgumentNullException(nameof(stopwordsRepository));
         }
 
+        /// <summary>
+        /// Gets all stopwords.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [ProducesResponseType(typeof(List<Stopwords>), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<List<Stopwords>>> GetStopwords()
@@ -30,6 +34,11 @@ namespace WebScraper.API.Controllers
             return stopwords;
         }
 
+        /// <summary>
+        /// Gets a stopword by id.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id:length(24)}", Name = "GetStopwordById")]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
         [ProducesResponseType(typeof(Stopwords), (int)HttpStatusCode.OK)]
@@ -43,6 +52,11 @@ namespace WebScraper.API.Controllers
             return Ok(stopword);
         }
 
+        /// <summary>
+        /// Create a stopword.
+        /// </summary>
+        /// <param name="stopword"></param>
+        /// <returns></returns>
         [HttpPost]
         [ProducesResponseType(typeof(Stopwords), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<Stopwords>> CreateStopword([FromBody] Stopwords stopword)
@@ -54,6 +68,11 @@ namespace WebScraper.API.Controllers
             return CreatedAtRoute("GetStopwordById", new { id = stopword.Id }, stopword);
         }
 
+        /// <summary>
+        /// Update a stopword.
+        /// </summary>
+        /// <param name="stopword"></param>
+        /// <returns></returns>
         [HttpPut]
         [ProducesResponseType(typeof(Stopwords), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> UpdateStopword([FromBody] Stopwords stopword)
@@ -61,6 +80,12 @@ namespace WebScraper.API.Controllers
             return Ok(await _stopwordsRepository.UpdateStopwords(stopword));
         }
 
+
+        /// <summary>
+        /// Deletes a stopword.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpDelete("{id:length(24)}")]
         [ProducesResponseType(typeof(Stopwords), (int)HttpStatusCode.OK)]
         public async Task<IActionResult> DeleteStopwordById(string id)

@@ -8,12 +8,15 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using WebScraper.API.Common.Options;
 using WebScraper.API.Data;
 using WebScraper.API.Interfaces.Scraper;
 using WebScraper.API.Interfaces.Stopwords;
+using WebScraper.API.Repositories.Cache;
 using WebScraper.API.Repositories.Stopwords;
 using WebScraper.API.Services.Scraper;
 
@@ -36,6 +39,10 @@ namespace WebScraper.API
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebScraper.API", Version = "v1" });
+
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                c.IncludeXmlComments(xmlPath);
             });
 
             //configure redis cache
@@ -53,6 +60,7 @@ namespace WebScraper.API
             services.AddSingleton<IStopwordContext, StopwordContext>();
             services.AddScoped<ITextScraperService, TextScraperService>();
             services.AddScoped<IStopwordsRepository, StopwordsRepository>();
+            services.AddScoped<ICacheUrlDataRepository, CacheUrlDataRepository>();
 
             //HttpClients
             services.AddHttpClient<ILinkScraperService, LinkScraperService>();

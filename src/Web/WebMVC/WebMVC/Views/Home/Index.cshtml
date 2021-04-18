@@ -1,8 +1,68 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model WebMVC.ViewModels.AnalyzeFormViewModel
+@using WebMVC.Domain.Enums
+<form method="post"
+      data-ajax="true"
+      data- data-ajax-method="post"
+      data-ajax-url="Home/SiteData"
+      data-ajax-loading="#overlay"
+      data-ajax-update="#analyze_info_id">
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <div class="flex-column">
+        <div class="d-flex justify-content-center align-items-center mt-2">
+            <h1>Search and analyze your data.</h1><br />
+        </div>
+
+        <div class="row">
+            <p>Insert Text or URL here:</p>
+            <textarea id="mainInput" rows="5" class="form-control" asp-for="Text"></textarea>
+        </div>
+
+        <br />
+
+        <div class="row g-3">
+            <div class="col">
+                <p>Type of data inserted:</p>
+                <select class="form-control" asp-for="ScrapeType">
+                    <option value="@ScrapeTypes.Text.Name">Text</option>
+                    <option value="@ScrapeTypes.Link.Name">Url</option>
+                </select>
+            </div>
+            <div class="col">
+                <p>Filters: </p>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="chkBody" asp-for="isBodySelected">
+                    <label class="form-check-label" for="chkBody">Body</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="chkMeta" asp-for="isMetaSelected">
+                    <label class="form-check-label" for="chkMeta">Meta</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="checkbox" id="chkLink" asp-for="isLinkSelected" >
+                    <label class="form-check-label" for="chkLink">Link</label>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row g-3">
+            <div>
+                <button type="submit" class="btn btn-dark text-white w-100 h-100">Analyze</button>
+            </div>
+        </div>
+    </div>
+
+
+</form>
+
+<br />
+<div id="analyze_info_id" class="">
 </div>
+
+@section Scripts{
+    <script>
+    </script>
+
+}

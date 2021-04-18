@@ -4,6 +4,9 @@ services:
   mongodb:
     image: mongo
   
+  redisinsights:
+    image: redislabs/redisinsight:latest
+
   redisdb:
     image: redis:alpine
 
@@ -23,6 +26,15 @@ services:
     depends_on: 
       - redisdb
 
+  webmvc:
+    image: ${DOCKER_REGISTRY-}webmvc
+    build:
+      context: .
+      dockerfile: Web/WebMVC/WebMVC/Dockerfile
+    depends_on:
+      - analytics.api
+      - webscraper.api
 
 volumes:
   mongo_data: 
+  redisinsight_data:

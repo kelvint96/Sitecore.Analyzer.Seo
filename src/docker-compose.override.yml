@@ -15,6 +15,13 @@ services:
     ports:
       - "6379:6379"
 
+  redisinsights:
+    container_name: redisinsights
+    ports:
+      - "8100:8001"
+    volumes:
+      - redisinsight_data:/data/redis
+
   analytics.api:
     container_name: analytics.api
     environment:
@@ -32,4 +39,12 @@ services:
       - "CacheSettings__ConnectionString=redisdb:6379"
     ports:
       - "9001:80"
+
+  webmvc: 
+    container_name: webmvc
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "Apis__WebScraper=http://webscraper.api/"
+    ports:
+      - "8000:80"
 

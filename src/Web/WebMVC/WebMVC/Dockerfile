@@ -6,10 +6,12 @@ EXPOSE 80
 
 FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
 WORKDIR /src
-COPY ["WebMVC/WebMVC.csproj", "WebMVC/"]
-RUN dotnet restore "WebMVC/WebMVC.csproj"
+COPY ["Web/WebMVC/WebMVC/WebMVC.csproj", "Web/WebMVC/WebMVC/"]
+COPY ["Web/WebMVC/Application/WebMVC.Application.csproj", "Web/WebMVC/Application/"]
+COPY ["Web/WebMVC/Domain/WebMVC.Domain.csproj", "Web/WebMVC/Domain/"]
+RUN dotnet restore "Web/WebMVC/WebMVC/WebMVC.csproj"
 COPY . .
-WORKDIR "/src/WebMVC"
+WORKDIR "/src/Web/WebMVC/WebMVC"
 RUN dotnet build "WebMVC.csproj" -c Release -o /app/build
 
 FROM build AS publish
