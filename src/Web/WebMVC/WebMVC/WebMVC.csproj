@@ -6,6 +6,8 @@
     <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..\..</DockerfileContext>
+	  <RootNamespace>WebMVC</RootNamespace>
+	  <AssemblyName>WebMVC</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

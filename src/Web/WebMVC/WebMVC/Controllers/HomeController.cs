@@ -45,19 +45,19 @@ namespace WebMVC.Controllers
 
         public async Task<IActionResult> BodyDataAsync(string text, string scrapeType)
         {
-            var bodyData = await _mediator.Send(new GetBodyCommand() {Text = text, ScrapeType = scrapeType });
+            var bodyData = await _mediator.Send(new GetBodyCommand() { Text = text ?? string.Empty, ScrapeType = scrapeType });
             return PartialView("_BodyAnalysis", bodyData);
         }
 
         public async Task<IActionResult> MetaDataAsync(string text, string scrapeType)
         {
-            var bodyData = await _mediator.Send(new GetMetaCommand() { Text = text, ScrapeType = scrapeType });
+            var bodyData = await _mediator.Send(new GetMetaCommand() { Text = text ?? string.Empty, ScrapeType = scrapeType });
             return PartialView("_MetaAnalysis", bodyData);
         }
 
         public async Task<IActionResult> LinkDataAsync(string text, string scrapeType)
         {
-            var bodyData = await _mediator.Send(new GetLinkCommand() { Text = text, ScrapeType = scrapeType });
+            var bodyData = await _mediator.Send(new GetLinkCommand() { Text = text ?? string.Empty, ScrapeType = scrapeType });
             return PartialView("_LinkAnalysis", bodyData);
         }
 

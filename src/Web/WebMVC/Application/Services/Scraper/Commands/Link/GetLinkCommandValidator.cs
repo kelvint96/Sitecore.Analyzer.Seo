@@ -12,8 +12,10 @@ namespace WebMVC.Application.Services.Scraper.Commands.Link
     {
         public GetLinkCommandValidator()
         {
+            CascadeMode = CascadeMode.Stop;
+
             RuleFor(v => v.ScrapeType).NotEmpty();
-            RuleFor(v => v.Text)
+            RuleFor(v => v.Text).NotEmpty()
                 .Must((o, text) => { return BeValidUrl(text, o.ScrapeType); }).WithMessage("Invalid URL string. Please enter a valid URL.");
         }
 

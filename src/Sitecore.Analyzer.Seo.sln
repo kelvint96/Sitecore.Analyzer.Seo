@@ -19,13 +19,15 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebMVC", "WebMVC", "{19A13D63-0ACC-47A9-8786-EDF37F2089E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMVC", "Web\WebMVC\WebMVC\WebMVC.csproj", "{6B90FF6D-55EA-4643-B294-828A3D51A74E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebMVC", "Web\WebMVC\WebMVC\WebMVC.csproj", "{6B90FF6D-55EA-4643-B294-828A3D51A74E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMVC.Application", "Web\WebMVC\Application\WebMVC.Application.csproj", "{DFD4FED8-7970-4960-A18C-138B56221567}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebMVC.Application", "Web\WebMVC\Application\WebMVC.Application.csproj", "{DFD4FED8-7970-4960-A18C-138B56221567}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMVC.Infrastructure", "Web\WebMVC\Infrastructure\WebMVC.Infrastructure.csproj", "{F544CCBB-85F3-4245-9390-2C8B4DA2E8A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebMVC.Infrastructure", "Web\WebMVC\Infrastructure\WebMVC.Infrastructure.csproj", "{F544CCBB-85F3-4245-9390-2C8B4DA2E8A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMVC.Domain", "Web\WebMVC\Domain\WebMVC.Domain.csproj", "{087BBEC8-4A85-4565-9340-6E3DC6F33FB7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebMVC.Domain", "Web\WebMVC\Domain\WebMVC.Domain.csproj", "{087BBEC8-4A85-4565-9340-6E3DC6F33FB7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.IntegrationTests", "..\Test.Application.IntegrationTests\Application.IntegrationTests.csproj", "{015D492D-BA88-4B35-B7F2-5833D25D191D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +63,10 @@ Global
 		{087BBEC8-4A85-4565-9340-6E3DC6F33FB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{087BBEC8-4A85-4565-9340-6E3DC6F33FB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{087BBEC8-4A85-4565-9340-6E3DC6F33FB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{015D492D-BA88-4B35-B7F2-5833D25D191D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{015D492D-BA88-4B35-B7F2-5833D25D191D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{015D492D-BA88-4B35-B7F2-5833D25D191D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{015D492D-BA88-4B35-B7F2-5833D25D191D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -75,6 +81,7 @@ Global
 		{DFD4FED8-7970-4960-A18C-138B56221567} = {19A13D63-0ACC-47A9-8786-EDF37F2089E8}
 		{F544CCBB-85F3-4245-9390-2C8B4DA2E8A1} = {19A13D63-0ACC-47A9-8786-EDF37F2089E8}
 		{087BBEC8-4A85-4565-9340-6E3DC6F33FB7} = {19A13D63-0ACC-47A9-8786-EDF37F2089E8}
+		{015D492D-BA88-4B35-B7F2-5833D25D191D} = {19A13D63-0ACC-47A9-8786-EDF37F2089E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AFFA6747-65C8-4487-BBE5-87F4BCF60001}
