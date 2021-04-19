@@ -50,7 +50,6 @@
     }
 
     if (@Json.Serialize(Model.isBodySelected)) {
-        $('#overlay').show()
         $.ajax({
             url: "Home/BodyData/",
             data: { text: '@Model.Text', scrapeType: '@Model.ScrapeType' },
@@ -58,14 +57,12 @@
                 $('#nav-body').html(data);
                 $('#overlay').hide()
             }, error: function (event, jqxhr, settings, thrownerror) {
-                debugger;
                 errorFactory(event.status, event)
             }
         });
     }
 
     if (@Json.Serialize(Model.isMetaSelected)) {
-        $('#overlay').show()
         $.ajax({
             url: "Home/MetaData/",
             data: { text: '@Model.Text', scrapeType: '@Model.ScrapeType' },
@@ -79,7 +76,6 @@
     }
 
     if (@Json.Serialize(Model.isLinkSelected)) {
-        $('#overlay').show()
         $.ajax({
             url: "Home/LinkData/",
             data: {text: '@Model.Text', scrapeType: '@Model.ScrapeType' },
@@ -135,4 +131,9 @@
         }
         handleUnknownError(err);
     }
+
+    setTimeout(function () {
+        $('#overlay').hide()
+    }, 5000);
+    $('#overlay').show();
 </script>
