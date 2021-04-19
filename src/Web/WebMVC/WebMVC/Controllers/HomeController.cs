@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using WebMVC.Application.Services.Scraper.Commands.Body;
 using WebMVC.Application.Services.Scraper.Commands.Link;
 using WebMVC.Application.Services.Scraper.Commands.Meta;
+using WebMVC.Domain.Enums;
 using WebMVC.Models;
 using WebMVC.ViewModels;
 
@@ -38,6 +39,7 @@ namespace WebMVC.Controllers
 
         public IActionResult SiteData(AnalyzeFormViewModel model)
         {
+            if (model.ScrapeType.Equals(ScrapeTypes.Text.Name)) model.isMetaSelected = false;
             return PartialView("_ScrapedData", model);
         }
 
