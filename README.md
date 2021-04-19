@@ -26,7 +26,7 @@ Assignment Project For SEO Analyzing
 Make sure all the prerequisites are installed before proceeding.
 
 ### Steps
-**Important: Make sure that Docker Desktop is running before proceeding.**
+**Important: Make sure that Docker Desktop is running before proceeding. Please also ensure that no other application are running on the same ports as the application mentioned in the secion above.**
 
 1. Firstly, create an empty folder and clone the repository into the folder.
 
@@ -46,4 +46,18 @@ Make sure all the prerequisites are installed before proceeding.
 - **Web UI** - http://localhost:8000
 - **Web Scraper API** - http://localhost:9001/swagger/index.html
 - **Redis Insights** - http://localhost:8100
+
+#### Optional: Using Redis Insights
+1. Accept all the terms and conditons on the first screen when entering redis insights for the first time.
+2. Choose "I already have a database option" and click on "Connect to a Redis Database"
+![image](https://user-images.githubusercontent.com/82433256/115178689-6ddbe200-a104-11eb-8800-dd8ac10a4d87.png)
+![image](https://user-images.githubusercontent.com/82433256/115178757-89df8380-a104-11eb-9684-88f88cc56f0d.png)
+
+3. Key in the following options and click on Add Redis Database.
+  'Host: redisdb
+  Port: 6379
+  Name: redisdb'
+
+4. The redis Insights will be ready and you can now view the stats and lookup on redis cache on redisdb.
+![image](https://user-images.githubusercontent.com/82433256/115179026-01adae00-a105-11eb-8606-ff40e43621fc.png)
 
