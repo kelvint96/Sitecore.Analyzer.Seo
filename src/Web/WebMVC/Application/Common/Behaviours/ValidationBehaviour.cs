@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ValidationException = WebMVC.Application.Common.Exceptions.ValidationException;
 
 namespace WebMVC.Application.Common.Behaviours
 {

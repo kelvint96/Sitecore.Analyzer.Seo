@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebMVC.Application;
+using WebMVC.Filters;
 using WebMVC.Infrastructure;
 
 namespace WebMVC
@@ -26,7 +27,9 @@ namespace WebMVC
         {
             services.AddInfrastructure(Configuration);
             services.AddApplication();
-            services.AddControllersWithViews();
+            services.AddControllersWithViews(options => {
+                options.Filters.Add<ApiExceptionFilterAttribute>();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -27,7 +27,8 @@ namespace WebMVC.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var model = new AnalyzeFormViewModel();
+            return View(model);
         }
 
         public IActionResult Privacy()

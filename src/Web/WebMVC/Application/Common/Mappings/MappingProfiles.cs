@@ -13,7 +13,6 @@ namespace WebMVC.Application.Common.Mappings
     {
         public MappingProfiles()
         {
-            CreateMap<BodyData, BodyDto>().ForMember(x => x.OccurenceList, opt => opt.MapFrom(x => x.BodyOccurence));
         }
     }
 }

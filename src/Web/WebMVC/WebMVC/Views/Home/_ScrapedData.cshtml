@@ -35,7 +35,7 @@
         }
         @if (Model.isLinkSelected)
         {
-    <div class="tab-pane fade" id="nav-link" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+            <div class="tab-pane fade" id="nav-link" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
         }
     </div>
 </div>
@@ -57,6 +57,9 @@
             success: function (data) {
                 $('#nav-body').html(data);
                 $('#overlay').hide()
+            }, error: function (event, jqxhr, settings, thrownerror) {
+                debugger;
+                errorFactory(event.status, event)
             }
         });
     }
@@ -69,6 +72,8 @@
             success: function (data) {
                 $('#nav-meta').html(data);
                 $('#overlay').hide()
+            }, error: function (event, jqxhr, settings, thrownerror) {
+                errorFactory(event.status, event)
             }
         });
     }
@@ -81,7 +86,53 @@
             success: function (data) {
                 $('#nav-link').html(data);
                 $('#overlay').hide()
+            }, error: function (event, jqxhr, settings, thrownerror) {
+                errorFactory(event.status, event)
             }
         });
+    }
+
+    var showErrorToast = (title, message) => {
+        toastr["error"](message, title,
+            {
+                "progressBar": true,
+                "positionClass": "toast-top-right",
+                "showDuration": "150",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut",
+                "preventDuplicates": true,
+            })
+    }
+
+    var handleBadRequestError = (err) => {
+        var message = err.responseJSON.errors?.Text.join('\n')
+        var title = err.status + " " + err.statusText
+        showErrorToast(title, message)
+    }
+
+    var handleInternalServerError = (err) => {
+        var message = "Unable to connect to the input URL"
+        var title = err.status + " " + err.statusText
+        showErrorToast(title, message)
+    }
+
+    var handleUnknownError = (err) => {
+        var message = "Unknown Error."
+        var title = err.status + " " + err.statusText
+        showErrorToast(title, message)
+    }
+
+    var errorFactory = (status, err) => {
+        if (status === 400) {
+            handleBadRequestError(err)
+            return;
+        }
+        if (status === 500) {
+            handleInternalServerError(err)
+            return;
+        }
+        handleUnknownError(err);
     }
 </script>

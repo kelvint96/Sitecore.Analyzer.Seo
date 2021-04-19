@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using WebScraper.API.Common.Exceptions;
 using WebScraper.API.Common.Extensions;
 using WebScraper.API.Dtos.Scraper;
 using WebScraper.API.Entities;
@@ -20,6 +21,10 @@ namespace WebScraper.API.Services.Scraper
         }
         public async Task<ScrapedData> ScrapeData(string link)
         {
+            Uri testUri;
+            var isUrl = Uri.TryCreate(link, UriKind.Absolute, out testUri) && (testUri.Scheme == Uri.UriSchemeHttp || testUri.Scheme == Uri.UriSchemeHttps);
+            if (!isUrl) throw new BadRequestException("An invalid Url is received.");
+
             var scrapedData = new ScrapedData();
 
             if (!string.IsNullOrEmpty(link))
@@ -29,8 +34,6 @@ namespace WebScraper.API.Services.Scraper
                 var rawHtmlData = await response.Content.ReadAsStringAsync();
                 HtmlDocument pageDocument = new HtmlDocument();
                 pageDocument.LoadHtml(rawHtmlData);
-
-
 
                 scrapedData.BodyContent = pageDocument.DocumentNode.SelectSingleNode("//body").InnerText;
 

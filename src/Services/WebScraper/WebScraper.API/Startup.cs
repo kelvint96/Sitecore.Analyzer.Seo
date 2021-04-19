@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using WebScraper.API.Common.Filters;
 using WebScraper.API.Common.Options;
 using WebScraper.API.Data;
 using WebScraper.API.Interfaces.Scraper;
@@ -35,7 +36,15 @@ namespace WebScraper.API
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            services.AddControllers(options => {
+                options.Filters.Add<ApiExceptionFilterAttribute>();
+            });
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WebScraper.API", Version = "v1" });
