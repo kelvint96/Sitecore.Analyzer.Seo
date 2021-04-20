@@ -57,6 +57,7 @@
                 $('#nav-body').html(data);
                 $('#overlay').hide()
             }, error: function (event, jqxhr, settings, thrownerror) {
+                $('#overlay').hide()
                 errorFactory(event.status, event)
             }
         });
@@ -70,6 +71,7 @@
                 $('#nav-meta').html(data);
                 $('#overlay').hide()
             }, error: function (event, jqxhr, settings, thrownerror) {
+                $('#overlay').hide()
                 errorFactory(event.status, event)
             }
         });
@@ -83,6 +85,7 @@
                 $('#nav-link').html(data);
                 $('#overlay').hide()
             }, error: function (event, jqxhr, settings, thrownerror) {
+                $('#overlay').hide()
                 errorFactory(event.status, event)
             }
         });
