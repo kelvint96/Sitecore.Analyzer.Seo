@@ -3,21 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{34C2D33C-14F5-413B-9EF7-726A423164DD}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{26679B42-9595-41B5-B56D-D7F0665FB438}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebScraper", "WebScraper", "{9C92A9ED-FBA5-4D5C-8DB0-D65FCEC642C5}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Analytics", "Analytics", "{92024D30-6123-47D7-92D8-CCF2E60E4F38}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Analytics.API", "Services\Analytics\Analytics.API\Analytics.API.csproj", "{CA16D152-BE4E-4375-AAA1-3BA1A1EBD0D2}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebScraper.API", "Services\WebScraper\WebScraper.API\WebScraper.API.csproj", "{FCE74B10-8045-4476-A60C-AFF648B1913B}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{6C797A5F-6246-426F-B311-9BEFA1EF54CF}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebMVC", "WebMVC", "{19A13D63-0ACC-47A9-8786-EDF37F2089E8}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebMVC", "Web\WebMVC\WebMVC\WebMVC.csproj", "{6B90FF6D-55EA-4643-B294-828A3D51A74E}"
 EndProject
@@ -27,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebMVC.Infrastructure", "We
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebMVC.Domain", "Web\WebMVC\Domain\WebMVC.Domain.csproj", "{087BBEC8-4A85-4565-9340-6E3DC6F33FB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.IntegrationTests", "..\Test.Application.IntegrationTests\Application.IntegrationTests.csproj", "{015D492D-BA88-4B35-B7F2-5833D25D191D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application.IntegrationTests", "Web\Tests\Test.Application.IntegrationTests\Application.IntegrationTests.csproj", "{015D492D-BA88-4B35-B7F2-5833D25D191D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
