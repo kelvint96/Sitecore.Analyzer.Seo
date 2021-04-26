@@ -25,7 +25,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\src\Web\WebMVC\WebMVC\WebMVC.csproj" />
+		<ProjectReference Include="..\..\WebMVC\WebMVC\WebMVC.csproj" />
 		<PackageReference Include="FluentAssertions" Version="5.10.3" />
 		<PackageReference Include="Moq" Version="4.15.1" />
 		<PackageReference Include="Respawn" Version="3.3.0" />
